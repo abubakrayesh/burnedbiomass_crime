@@ -37,11 +37,7 @@ replace ins_3da_45 = ins_3a					if age>45
 
 *preserve
 
-drop if month>12
-keep if male==1
-keep if age>15
 
-keep if month==1 | month==2 | month==3 | month==11 | month==12
 
 
 *Table 4
