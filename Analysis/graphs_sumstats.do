@@ -1,8 +1,8 @@
-****	This do file produces the figures 1 and 3 presented in the paper		****
+****	This do file produces the figures 1, 2 and 3 presented in the paper		****
 ***		It also generates summary stats for table A1 in the appendix			***
 
 
-*** Figure 3
+*Figure 3
 use "${...}\fire_final_d.dta", clear
 
 preserve
@@ -19,9 +19,11 @@ twoway bar avg_fire year,  ytitle(Total No. of Fires during Rest of the Year) xt
 graph export "${graphs}\year_fire2.png", as(png) replace
 restore
 
-****************
 
-*** Figure 1
+
+							****************
+
+*Figure 1
 
 use "${...}\aod_final_d.dta", clear
 
@@ -35,7 +37,10 @@ graph export "${...}\year_aod.png", as(png) replace
 restore
 
 
-*** Figure 2
+
+							****************
+
+*Figure 2
 use "${...}\treatment.dta", clear
 
 label 	define rice 		0 "Other districts" ///
@@ -56,8 +61,9 @@ spmap rice_dist using "${...}\dist_shp_coor.dta", ///
 			legend(pos(6) row(3) ring(1) size(*.75) symx(*.75) symy(*.75) forcesize )
 
 
+							****************
 
-*** Table A1: Generating summary stats 
+*Table A1: Generating summary stats 
 
 clear*
 use"${...}\final_totalcrime.dta", clear

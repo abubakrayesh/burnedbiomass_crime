@@ -1,4 +1,4 @@
-****	This do file runs the heterogeneity checcks								****
+****	This do file runs the heterogeneity checks								****
 
 
 
@@ -22,9 +22,11 @@ foreach var of varlist crime_AttemptedMurder crime_Burglary crime_Hurt  ///
 		
 		}
 
-*Table A16
+*Table A10
 
-ivreg2 log_crime_AttemptedMurder_a (zscore_w_aod_2 = ins_3) ///
+*Panel A
+*Column 1
+ivreg2 log_crime_AttemptedMurder_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
 				savefirst savefprefix(first_)
@@ -33,12 +35,18 @@ boottest		zscore_w_aod_2, boottype(wild) seed(5)
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
 local	avgarea	= r(mean)
 sum				crime_AttemptedMurder
 local	avgcrime	= r(mean)
-										
-ivreg2 log_crime_Hurt_a (zscore_w_aod_2 = ins_3) ///
+				
+				
+				
+				******************************
+
+
+*Column 2										
+ivreg2 log_crime_Hurt_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
 				savefirst savefprefix(first_)	
@@ -47,147 +55,17 @@ boottest		zscore_w_aod_2, boottype(wild) seed(5)
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
 local	avgarea	= r(mean)
 sum				crime_Hurt
 local	avgcrime	= r(mean)
-				
-				
-ivreg2 logl_crime_KidnappingAbduction_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_KidnappingAbduction
-local	avgcrime	= r(mean)
-				
-				
-ivreg2 log_crime_Murder_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_Murder
-local	avgcrime	= r(mean)	
-								
-				
-ivreg2 log_crime_Rape_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_Rape
-local	avgcrime	= r(mean)
-						
-						
-						
-						
-						
-						
-						
-						*****************************
-		
-*Table A18:
-		
-ivreg2 log_crime_Dacoity_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_Dacoity
-local	avgcrime	= r(mean)						
-				
-ivreg2 log_crime_Robbery_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_Robbery
-local	avgcrime	= r(mean)	
-				
-				
-ivreg2 log_crime_Burglary_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_Burglary
-local	avgcrime	= r(mean)
-				
-				
-ivreg2 log_crime_MotorVehiclesTheft_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_MotorVehiclesTheft
-local	avgcrime	= r(mean)					
-								
-				
-ivreg2 log_crime_OrdinaryThefts_a (zscore_w_aod_2 = ins_3) ///
-				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
-
-boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
-local	bootp	= r(p)	
-sum				mean_stat_aod
-local	avgaod	= r(mean)
-sum				area_2017
-local	avgarea	= r(mean)
-sum				crime_OrdinaryThefts
-local	avgcrime	= r(mean)
-				
-				
 				
 				
 				
 				******************************
 				
-*Table A17:				
-ivreg2 logl_crime_AttemptedMurder_a (zscore_w_aod_2= ins_3) ///
+*Column 3				
+ivreg2 log_crime_KidnappingAbduction_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
 				savefirst savefprefix(first_)	
@@ -196,12 +74,18 @@ boottest		zscore_w_aod_2, boottype(wild) seed(5)
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
 local	avgarea	= r(mean)
-sum				crime_AttemptedMurder
+sum				crime_KidnappingAbduction
+local	avgcrime	= r(mean)Abduction
 local	avgcrime	= r(mean)
-										
-ivreg2 logl_crime_Hurt_a (zscore_w_aod_2 = ins_3) ///
+				
+				
+				
+				******************************				
+
+*Column 4				
+ivreg2 log_crime_Murder_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
 				savefirst savefprefix(first_)
@@ -210,13 +94,79 @@ boottest		zscore_w_aod_2, boottype(wild) seed(5)
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_Murder
+local	avgcrime	= r(mean)	
+				
+				
+				
+				******************************								
+
+*Column 5				
+ivreg2 log_crime_Rape_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)	
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_Rape
+local	avgcrime	= r(mean)
+							
+						
+						
+						
+						********************************
+						
+						
+
+*Panel B
+*Column 1
+ivreg2 logl_crime_AttemptedMurder_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_AttemptedMurder
+local	avgcrime	= r(mean)
+				
+				
+				
+				******************************
+
+
+*Column 2										
+ivreg2 logl_crime_Hurt_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)	
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
 local	avgarea	= r(mean)
 sum				crime_Hurt
 local	avgcrime	= r(mean)
 				
 				
-ivreg2 logl_crime_KidnappingAbduction_a (zscore_w_aod_2 = ins_3) ///
+				
+				******************************
+				
+*Column 3				
+ivreg2 logl_crime_KidnappingAbduction_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
 				savefirst savefprefix(first_)	
@@ -225,28 +175,37 @@ boottest		zscore_w_aod_2, boottype(wild) seed(5)
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
 local	avgarea	= r(mean)
 sum				crime_KidnappingAbduction
+local	avgcrime	= r(mean)Abduction
 local	avgcrime	= r(mean)
 				
 				
-ivreg2 logl_crime_Murder_a (zscore_w_aod_2 = ins_3) ///
+				
+				******************************				
+
+*Column 4				
+ivreg2 logl_crime_Murder_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
-				savefirst savefprefix(first_)	
+				savefirst savefprefix(first_)
 
 boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
 local	avgarea	= r(mean)
 sum				crime_Murder
-local	avgcrime	= r(mean)			
-								
+local	avgcrime	= r(mean)	
 				
-ivreg2 logl_crime_Rape_a (zscore_w_aod_2 = ins_3) ///
+				
+				
+				******************************								
+
+*Column 5				
+ivreg2 logl_crime_Rape_a (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
 				i.year i.dist_id,  cluster(dist_id)  ///
 				savefirst savefprefix(first_)	
@@ -255,7 +214,114 @@ boottest		zscore_w_aod_2, boottype(wild) seed(5)
 local	bootp	= r(p)	
 sum				mean_stat_aod
 local	avgaod	= r(mean)
-sum				area_2017
+sum				pop_2017
 local	avgarea	= r(mean)
 sum				crime_Rape
+local	avgcrime	= r(mean)		
+		
+		
+		
+		
+				*********************************************		
+		
+		
+		
+		
+*Table A11:
+		
+*Column 1
+ivreg2 log_crime_Dacoity_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)	
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_Dacoity
 local	avgcrime	= r(mean)
+				
+				
+				
+				******************************
+
+
+*Column 2										
+ivreg2 log_crime_Robbery_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)	
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_Robbery
+local	avgcrime	= r(mean)
+				
+				
+				
+				******************************
+				
+*Column 3				
+ivreg2 log_crime_Burglary_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_Burglary
+local	avgcrime	= r(mean)
+				
+				
+				
+				******************************				
+
+*Column 4				
+ivreg2 log_crime_MotorVehiclesTheft_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)	
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_MotorVehiclesTheft
+local	avgcrime	= r(mean)
+				
+				
+				
+				******************************								
+
+*Column 5				
+ivreg2 log_crime_OrdinaryThefts_a (zscore_w_aod_2 = ins_3 ins_3a) ///
+				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
+				i.year i.dist_id,  cluster(dist_id)  ///
+				savefirst savefprefix(first_)	
+
+boottest		zscore_w_aod_2, boottype(wild) seed(5)		 
+local	bootp	= r(p)	
+sum				mean_stat_aod
+local	avgaod	= r(mean)
+sum				pop_2017
+local	avgarea	= r(mean)
+sum				crime_OrdinaryThefts
+local	avgcrime	= r(mean)	
+				
+				
+				
+				***********************************
+				

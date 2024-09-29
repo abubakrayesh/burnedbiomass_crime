@@ -1,28 +1,17 @@
 ****	This do file calculates VOSL estimates ****
 ****																	****
 
-global crime "C:\Users\abuba\Dropbox\Smog-Crime\Data\Crime"
-global finaltemp "C:\Users\abuba\Dropbox\Smog-Crime\Data\Final_temp"
-global final "C:\Users\abuba\Dropbox\Smog-Crime\Data\Final"
-global weather "C:\Users\abuba\Dropbox\Smog-Crime\Data\Rainfall and Temp"
-global shape "C:\Users\abuba\Dropbox\Smog-Crime\Data\Pak_SHP"
-global rice "C:\Users\abuba\Dropbox\Smog-Crime\Data\Rice"
-global graphs "C:\Users\abuba\Dropbox\Smog-Crime\Output\Graphs"
-global distance "C:\Users\abuba\Dropbox\Smog-Crime\Data\Distance"
-global ghd "C:\Users\abuba\Dropbox\Smog-Crime\Data\GHDx"
-
-clear
-set more off
 
 
-
-use"${final}\final_totalcrime.dta", clear
+use"${...}\final_totalcrime.dta", clear
 set more off
 
 *storing the effect of crime from the regression
-ivreg2 log_crimev_area (zscore_w_aod = ins_3) ///
+ivreg2 log_crimev_pop (zscore_w_aod_2 = ins_3 ins_3a) ///
 				d_w_avgt_temp d_w_avgt_precip d_avgt_fire ///
-				i.year i.dist_id, cluster(yrdist)
+				rice_production rice_area pslm_meaneduc_dist pslm_meandaywk_dist ///
+				i.year i.dist_id i.division_id#c.year, cluster(dist_id) first  ///
+				
 
 matrix 		all_results = e(b)						//storing all the results from the regression//
 matrix 		crime_result = all_results[1,1]			//storing only the relevant coefficient on zscore_w_aod//
@@ -121,25 +110,18 @@ sum		crime_aod_cost_USAAssault
 
 *gen		crime_aod_cost_USAMurder = (`crime_change_aod' / 100) * (`crime_before_aod') * (`Pak_Murder_2018USA')
 *sum		crime_aod_cost_USAMurder
-*exit
 
 
 
 
 
-*use "${final}\value_life.dta", clear	
 
-*storing the value of lost years in life for later calculations
-*levelsof val if year==2017 & measure_id==2, local(value_lostyears)
-
-*gen		crime_aod_cost = `crime_change_aod' * `value_lostyears'
-*sum		crime_aod_cost
 
 
 
 
 *** Now separate calculations for each type of crime***
-use"${final}\final_totalcrime.dta", clear
+use"${...}\final_totalcrime.dta", clear
 set more off
 
 
@@ -189,11 +171,11 @@ foreach var of varlist crime_AttemptedMurder crime_Burglary crime_Hurt  ///
 		crime_Murder crime_OrdinaryThefts crime_Rape crime_Robbery 		{
 	
 	bys dist_id: gen lag_`var' = `var'[_n+1]
-	gen lag_`var'_a = lag_`var'/area_2017
+	gen lag_`var'_a = lag_`var'/pop_2017
 	gen logl_`var'_a 			= ln(lag_`var'_a)
 	replace logl_`var'_a 		= 0 					if lag_`var'_a==0
 	
-	gen `var'_area = `var'/area_2017
+	gen `var'_area = `var'/pop_2017
 	gen log_`var'_a			= ln(`var'_a)
 	replace `var'_a 		= 0 						if `var'==0
 		
