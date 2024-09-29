@@ -1,0 +1,11 @@
+Replication Using Final Data:
+•	The files of interest are located in: (a) Data/Final/final_totalcrime.dta  and (b) Data/Final/final_mech.dta 
+•	The DO files used to run this code are located in: Code/Analysis/file_name
+•	There are the following ‘file_name’:
+o	fstage_ols_etc: It runs (a) the first stage regressions presented in Table 1, (b) OLS results from the main estimation equation, (c) OLS results presenting the link between fires and air pollution in robustness analysis, and (d) placebo test IV results presented in the robustness analysis.
+o	graphs_sumstats: It runs the summary stats table in the Data section and the three graphs presented in the Background section.
+o	violent: It runs, for violent crimes, (a) all the main IV estimation equation results and (b) all the robustness analysis results -except for the placebo test, and the link between fires and air pollution.
+o	nonviolent: It runs the same as the previous bullet point, but for non-violent crimes.
+o	hetero: It runs the results presented in the heterogeneity analysis section.
+o	mechanism: It runs the results presented in the mechanisms section.
+o	cost: It runs the analysis presented in the Policy Implications section.
