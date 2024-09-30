@@ -13,7 +13,6 @@ For do files to be used for each step, refer to the below:
 
 
 The raw data files are located in Raw.
-Note: the raw raster files for Aerosol Optical Depth and Fire data, and dta files for publicly available survey data for mechanisms are not provided because they are more than 65 GB in size. However, the code used to process those raster files is provided in Code/R/aod and Code/Stata/PSLM. 
 
 The Raw data files are then used to create the data files located in Temporary.
   Both R and Stata are used for this purpose. The relevant code can be found at RCode/weather and RCode/wind for R files; and StataCode/climate for Stata.
@@ -28,3 +27,6 @@ The Temporary data files are then used to create the data files located in Proce
 
 Finally, construct the final two datasets for analysis, located in Final.
   The Do file in StataCode titled “merge” is used for this purpose.
+
+
+  For access to the Raw or Temporary Data, please contact the author.
